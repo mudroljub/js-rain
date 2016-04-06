@@ -1,0 +1,19 @@
+{
+  "name": "kisha",
+  "version": "0.0.0",
+  "description": "ES6 Javascript rain with Webpack.",
+  "main": "main.js",
+  "scripts": {
+    "watch": "babel-node -- ./node_modules/.bin/webpack-dev-server --progress",
+    "start": "babel-node -- ./node_modules/.bin/webpack-dev-server --progress"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "author": "mudroljub",
+  "license": "BSD"
+}
