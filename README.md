@@ -5,10 +5,10 @@
 First install  [node.js](https://nodejs.org). Then install dependencies:
 * `npm install`
 
-To start a simple example:
-* `npm run watch`
+To start raining:
+* `npm start`
 
-Now, you are ready for development. The browser will automatically update when you save.
+Then open http://localhost:8080/. The browser will automatically update when you save.
 
 ## Todo:
 * dodati vetar
