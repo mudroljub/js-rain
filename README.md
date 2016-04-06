@@ -8,7 +8,7 @@ First install  [node.js](https://nodejs.org). Then install dependencies:
 To start raining:
 * `npm start`
 
-Then open http://localhost:8080/. The browser will automatically update when you save.
+Then open [http://localhost:8080/](http://localhost:8080/). The browser will automatically update when you save.
 
 ## Todo:
 * dodati vetar
