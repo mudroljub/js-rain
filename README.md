@@ -3,7 +3,6 @@
 ## <a name="Installation"></a>Installation ##
 
 First install  [node.js](https://nodejs.org). Then install dependencies:
-* `sudo npm install -g webpack`
 * `npm install`
 
 To start a simple example:
