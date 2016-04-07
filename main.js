@@ -7,7 +7,6 @@ const ZALET_KISHE = 100;  // manji broj brzi zalet
 let Game = {};
 let canvas, podloga;
 let kisha = [];
-let trenutnoKapi = 10;
 let prosliTren = 0;
 
 /*** KLASE ***/
@@ -35,6 +34,13 @@ class Kap {
     this.podloga.fillRect(this.x, this.y, 1, VISINA_KAPI);
   }
 
+  crtaPrasak() {
+    console.log('prska', this.x, this.y);
+    this.podloga.beginPath();
+    this.podloga.arc(this.x, this.y, 5, 0, 2 * Math.PI);
+    this.podloga.stroke();
+  }
+
 } // Kap
 
 /*** LOGIKA ***/
@@ -44,9 +50,6 @@ window.onload = function() {
   canvas.width = window.innerWidth || window.outerWidth;
   canvas.height = window.innerHeight || window.outerHeight;
   podloga = canvas.getContext('2d');
-  for (let i = 0; i < BROJ_KAPI; i++) {
-    kisha[i] = new Kap(canvas);
-  }
   mainLoop();
 }
 
@@ -57,8 +60,8 @@ function mainLoop(tren) {
 } // mainLoop
 
 function update(tren) {
-  if (trenutnoKapi < kisha.length) dodajKap(tren);
-  for (let i = 0; i < trenutnoKapi; i++) {
+  if (kisha.length < BROJ_KAPI) dodajKap(tren);
+  for (let i = 0; i < kisha.length; i++) {
     kisha[i].update();
   }
 } // update
@@ -74,7 +77,8 @@ function crta() {
 
 function dodajKap(tren) {
   if ((tren - prosliTren) > ZALET_KISHE) {
-    trenutnoKapi++;
+    let novaKap = new Kap(canvas);
+    kisha.push(novaKap);
     prosliTren = tren
   }
 } // dodajKap
