@@ -33,7 +33,6 @@ function crta() {
   podloga.clearRect(0, 0, canvas.width, canvas.height);
   for (let kap of kisha) {
     kap.crta();
-    kap.crtaPrskanje();
   }
 }
 

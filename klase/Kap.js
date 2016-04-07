@@ -14,21 +14,13 @@ export class Kap {
   update() {
     this.y += this.brzina;
     if (this.y > window.innerHeight) {
-      this.pamtiPrskanje();
+      this.prskanje = new Prasak(this.podloga, this.x, this.y);
       this.reset();
     }
-    this.azuriraPrskanje();
-    if (this.y > 100) this.resetPrskanje();
-  }
-
-  pamtiPrskanje() {
-    this.prskanjeX = this.x;
-    this.prskanjeY = this.y;
-  }
-
-  azuriraPrskanje() {
-    if (!this.prskanjeX || !this.prskanjeY) return;
-    this.prskanjeY += 0.1;
+    if (this.prskanje) {
+			this.prskanje.update();
+			if (this.y > 100) this.prskanje.reset();
+		}
   }
 
   reset() {
@@ -36,23 +28,52 @@ export class Kap {
     this.y = -10;
   }
 
-  resetPrskanje() {
-    this.prskanjeX = null;
-    this.prskanjeY = null;
-  }
-
   crta() {
     // this.podloga.fillStyle = "#00f";
     this.podloga.fillRect(this.x, this.y, 1, VISINA_KAPI);
-  }
+		if(this.prskanje) {
+			this.prskanje.crta();
+		}
 
-  crtaPrskanje() {
-    if (!this.prskanjeX || !this.prskanjeY) return;
-    this.podloga.beginPath();
-    this.podloga.arc(this.prskanjeX, this.prskanjeY, 5, 0, 2 * Math.PI);
-    // this.podloga.fillStyle = '#0ff';
-    this.podloga.fill();
-    this.podloga.stroke();
   }
 
 } // Kap
+
+class Prasak {
+
+	constructor(podloga, x, y) {
+		this.podloga = podloga;
+		this.x = x;
+		this.y = y;
+	}
+
+	update() {
+		if (!this.x || !this.y) return;
+		this.y += 0.1;
+	}
+
+	reset() {
+		this.x = null;
+		this.y = null;
+	}
+
+	crtaBaricu() {
+		if (!this.x || !this.y) return;
+		this.podloga.beginPath();
+		this.podloga.arc(this.x, this.y, 5, 0, 2 * Math.PI);
+		// this.podloga.fillStyle = '#0ff';
+		this.podloga.fill();
+		this.podloga.stroke();
+	}
+
+	crtaPrskanje() {
+		if (!this.x || !this.y) return;
+		this.podloga.fillRect(this.x, this.y - 10, 1, 1 );
+	}
+
+	crta() {
+		this.crtaBaricu();
+		this.crtaPrskanje();
+	}
+
+}
