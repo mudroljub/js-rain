@@ -11,7 +11,8 @@ To start raining:
 Then open [http://localhost:8080/](http://localhost:8080/). The browser will automatically update when you save.
 
 ## Todo:
-* dodati vetar povezan sa pokretom miša
+* različite veličine kapi različite brzine
+* dodati vetar pokretan pokretom miša
 * odstupanja od konstante brzine
 * prskanje kad padne na tlo
 * noć i munje?
