@@ -3,11 +3,11 @@
 const BRZINA_KISHE = 2.8;
 const VISINA_KAPI = 9;
 const BROJ_KAPI = 200;
-const ZALET_KISHE = 100;  // manji broj brzi zalet
+const UCESTALOST_KISHE = 100;  // manji broj brzi zalet
 let Game = {};
 let canvas, podloga;
 let kisha = [];
-let prosliTren = 0;
+let prosliovajTren = 0;
 
 /*** KLASE ***/
 
@@ -53,32 +53,28 @@ window.onload = function() {
   mainLoop();
 }
 
-function mainLoop(tren) {
+function mainLoop(ovajTren) {
   Game.loopId = window.requestAnimationFrame(mainLoop);
-  update(tren); // tren daje requestAnimationFrame
+  update(ovajTren); // ovajTren daje requestAnimationFrame
   crta();
 } // mainLoop
 
-function update(tren) {
-  if (kisha.length < BROJ_KAPI) dodajKap(tren);
-  for (let i = 0; i < kisha.length; i++) {
-    kisha[i].update();
-  }
+function update(ovajTren) {
+  if (kisha.length < BROJ_KAPI) dodajKap(ovajTren);
+  for (let kap of kisha) kap.update();
 } // update
 
 function crta() {
   podloga.clearRect(0, 0, canvas.width, canvas.height);
-  for (let i = 0; i < kisha.length; i++) {
-    kisha[i].crta();
-  }
+  for (let kap of kisha) kap.crta();
 }
 
 /*** POMOĆNE FUNKCIJE ***/
 
-function dodajKap(tren) {
-  if ((tren - prosliTren) > ZALET_KISHE) {
+function dodajKap(ovajTren) {
+  if ((ovajTren - prosliovajTren) > UCESTALOST_KISHE) {
     let novaKap = new Kap(canvas);
     kisha.push(novaKap);
-    prosliTren = tren
+    prosliovajTren = ovajTren;
   }
 } // dodajKap
