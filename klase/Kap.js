@@ -26,12 +26,11 @@ export class Kap {
   }
 
   reset() {
-    this.x = Math.floor(Math.random() * (window.innerWidth || window.outerWidth)); // innerWidth returns 0 first time
+    this.x = Math.floor(Math.random() * (window.innerWidth || window.outerWidth)); // innerWidth returns 0?
     this.y = -10;
   }
 
   crta() {
-    // this.podloga.fillStyle = "#00f";
     this.podloga.fillRect(this.x, this.y, 1, VISINA_KAPI);
 		if(this.prskanje) {
 			this.prskanje.crta();
@@ -66,7 +65,6 @@ class Prasak {
 		if (!this.x || !this.y) return;
 		this.podloga.beginPath();
 		this.podloga.arc(this.x, this.y, 5, 0, 2 * Math.PI);
-		// this.podloga.fillStyle = '#0ff';
 		this.podloga.fill();
 		this.podloga.stroke();
 	}
