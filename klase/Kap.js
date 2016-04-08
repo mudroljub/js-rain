@@ -47,6 +47,7 @@ class Prasak {
 		this.x = x;
 		this.y = y;
     this.domet = 0;
+    this.ugloviPrskanja = [];
 	}
 
 	update() {
@@ -71,7 +72,11 @@ class Prasak {
 
 	crtaPrskanje() {
 		if (!this.x || !this.y) return;
-		this.podloga.fillRect(this.x, this.y - this.domet, 1, 1 );
+    let randomUgao = (Math.random() * Math.PI) * Math.PI;
+    this.ugloviPrskanja[0] = this.ugloviPrskanja[0] || randomUgao;
+    this.podloga.beginPath();
+    this.podloga.arc(this.x, this.y, this.domet, this.ugloviPrskanja[0], this.ugloviPrskanja[0] + 0.1);
+    this.podloga.stroke();
 	}
 
 	crta() {
