@@ -1,5 +1,7 @@
 const VISINA_KAPI = 9;
 const BRZINA_KISHE = 2.8;
+const TRAJANJE_PRASKA = 100;
+const DOMET_PRASKA = 50;
 
 export class Kap {
 
@@ -19,7 +21,7 @@ export class Kap {
     }
     if (this.prskanje) {
 			this.prskanje.update();
-			if (this.y > 100) this.prskanje.reset();
+			if (this.y > TRAJANJE_PRASKA) this.prskanje.reset();
 		}
   }
 
@@ -45,11 +47,14 @@ class Prasak {
 		this.podloga = podloga;
 		this.x = x;
 		this.y = y;
+    this.domet = 0;
 	}
 
 	update() {
 		if (!this.x || !this.y) return;
 		this.y += 0.1;
+    this.domet += 2;
+    if (this.domet > DOMET_PRASKA) this.domet = 0;
 	}
 
 	reset() {
@@ -68,7 +73,7 @@ class Prasak {
 
 	crtaPrskanje() {
 		if (!this.x || !this.y) return;
-		this.podloga.fillRect(this.x, this.y - 10, 1, 1 );
+		this.podloga.fillRect(this.x, this.y - this.domet, 1, 1 );
 	}
 
 	crta() {
