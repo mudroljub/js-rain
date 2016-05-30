@@ -1,13 +1,18 @@
 /*** KONFIG ***/
 
-const BRZINA_KISHE = 2.8;
+const BRZINA_KISHE = 5.8;
 const VISINA_KAPI = 9;
 const BROJ_KAPI = 200;
 const UCESTALOST_KISHE = 100;  // manji broj brzi zalet
+let vetar = 0;
 let Game = {};
 let canvas, podloga;
 let kisha = [];
-let prosliovajTren = 0;
+let prosliTren = 0;
+let mish = {
+  prosliX: 0,
+  prosliY: 0
+}
 
 /*** KLASE ***/
 
@@ -21,6 +26,7 @@ class Kap {
 
   update() {
     this.y += this.brzina;
+    this.x += vetar;
     if (this.y > window.innerHeight) this.reset();
   }
 
@@ -43,7 +49,7 @@ class Kap {
 
 } // Kap
 
-/*** LOGIKA ***/
+/*** LISTENERS ***/
 
 window.onload = function() {
   canvas = document.querySelector('#canvas');
@@ -53,16 +59,24 @@ window.onload = function() {
   mainLoop();
 }
 
+document.addEventListener('mousemove', (e) => {
+  vetar = e.clientX - mish.prosliX;
+  console.log(vetar);
+  mish.prosliX = e.clientX;
+})
+
+/*** LOGIKA ***/
+
 function mainLoop(ovajTren) {
   Game.loopId = window.requestAnimationFrame(mainLoop);
   update(ovajTren); // ovajTren daje requestAnimationFrame
   crta();
-} // mainLoop
+}
 
 function update(ovajTren) {
   if (kisha.length < BROJ_KAPI) dodajKap(ovajTren);
   for (let kap of kisha) kap.update();
-} // update
+}
 
 function crta() {
   podloga.clearRect(0, 0, canvas.width, canvas.height);
@@ -72,9 +86,9 @@ function crta() {
 /*** POMOĆNE FUNKCIJE ***/
 
 function dodajKap(ovajTren) {
-  if ((ovajTren - prosliovajTren) > UCESTALOST_KISHE) {
+  if ((ovajTren - prosliTren) > UCESTALOST_KISHE) {
     let novaKap = new Kap(canvas);
     kisha.push(novaKap);
-    prosliovajTren = ovajTren;
+    prosliTren = ovajTren;
   }
 } // dodajKap
