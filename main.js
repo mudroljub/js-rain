@@ -1,26 +1,31 @@
-/*** KONFIG ***/
+// vece i manje kapi
+// da vece padaju brze
+// inicirati mish.prosloX u init
 
-const BRZINA_KISHE = 5.8;
-const VISINA_KAPI = 9;
-const BROJ_KAPI = 200;
-const UCESTALOST_KISHE = 100;  // manji broj brzi zalet
+const PROSECNA_BRZINA = 5.8;
+const MIN_VISINA_KAPI = 3;
+const MAX_VISINA_KAPI = 10;
+const PROSECNA_VISINA = (MIN_VISINA_KAPI + MAX_VISINA_KAPI) / 2;
+const UKUPNO_KAPI = 300;
+const PAUZA_KAPI = 100; // milisekundi
 let vetar = 0;
 let Game = {};
 let canvas, podloga;
 let kisha = [];
 let prosliTren = 0;
 let mish = {
-  prosliX: 0,
-  prosliY: 0
+  prosloX: 0
 }
 
 /*** KLASE ***/
 
 class Kap {
 
-  constructor(canvas, brzina = BRZINA_KISHE) {
+  constructor(canvas) {
     this.podloga = canvas.getContext('2d');
-    this.brzina = brzina;
+    this.visina = Math.random() * (MAX_VISINA_KAPI - MIN_VISINA_KAPI) + MIN_VISINA_KAPI;
+    let odstupanjeVisine = this.visina - PROSECNA_VISINA;
+    this.brzina = PROSECNA_BRZINA + odstupanjeVisine / 5;
     this.reset();
   }
 
@@ -31,13 +36,14 @@ class Kap {
   }
 
   reset() {
-    this.x = Math.floor(Math.random() * (window.innerWidth || window.outerWidth)); // innerWidth returns 0 first time
+    let sirinaEkrana = window.innerWidth || window.outerWidth; // innerWidth vraca 0 prvi put
+    this.x = Math.floor(Math.random() * (sirinaEkrana * 2) - sirinaEkrana / 2);
     this.y = -10;
   }
 
   crta() {
     this.podloga.fillStyle = "#00f";
-    this.podloga.fillRect(this.x, this.y, 1, VISINA_KAPI);
+    this.podloga.fillRect(this.x, this.y, 1, this.visina);
   }
 
   crtaPrasak() {
@@ -51,7 +57,7 @@ class Kap {
 
 /*** LISTENERS ***/
 
-window.onload = function() {
+window.onload = function init() {
   canvas = document.querySelector('#canvas');
   canvas.width = window.innerWidth || window.outerWidth;
   canvas.height = window.innerHeight || window.outerHeight;
@@ -59,26 +65,22 @@ window.onload = function() {
   mainLoop();
 }
 
-document.addEventListener('mousemove', (e) => {
-  vetar = e.clientX - mish.prosliX;
-  console.log(vetar);
-  mish.prosliX = e.clientX;
-})
+document.addEventListener('mousemove', praviVetar);
 
 /*** LOGIKA ***/
 
 function mainLoop(ovajTren) {
   Game.loopId = window.requestAnimationFrame(mainLoop);
-  update(ovajTren); // ovajTren daje requestAnimationFrame
-  crta();
+  update(ovajTren); // ovajTren prosledjuje requestAnimationFrame
+  crtaKapi();
 }
 
 function update(ovajTren) {
-  if (kisha.length < BROJ_KAPI) dodajKap(ovajTren);
+  if (kisha.length < UKUPNO_KAPI) dodajKap(ovajTren);
   for (let kap of kisha) kap.update();
 }
 
-function crta() {
+function crtaKapi() {
   podloga.clearRect(0, 0, canvas.width, canvas.height);
   for (let kap of kisha) kap.crta();
 }
@@ -86,9 +88,14 @@ function crta() {
 /*** POMOĆNE FUNKCIJE ***/
 
 function dodajKap(ovajTren) {
-  if ((ovajTren - prosliTren) > UCESTALOST_KISHE) {
+  if ((ovajTren - prosliTren) > PAUZA_KAPI) {
     let novaKap = new Kap(canvas);
     kisha.push(novaKap);
     prosliTren = ovajTren;
   }
-} // dodajKap
+}
+
+function praviVetar (e) {
+  vetar = (e.clientX - mish.prosloX) / 10;
+  mish.prosloX = e.clientX;
+}
