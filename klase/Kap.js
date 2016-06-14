@@ -1,38 +1,49 @@
 import {Prasak} from './Prasak'
 
-const VISINA_KAPI = 9;
-const BRZINA_KISHE = 2.8;
+const MIN_VISINA_KAPI = 3;
+const MAX_VISINA_KAPI = 10;
+const PROSECNA_VISINA = (MIN_VISINA_KAPI + MAX_VISINA_KAPI) / 2;
+const PROSECNA_BRZINA = 5.8;
 const TRAJANJE_PRASKA = 100;
+
+let vetar = 0;
+let prosloMishX = 0;  // inicirati mish.prosloX da ne bude 0
+document.addEventListener('mousemove', praviVetar);
 
 export class Kap {
 
-  constructor(canvas, brzina = BRZINA_KISHE) {
+  constructor(canvas) {
     this.podloga = canvas.getContext('2d');
     this.podloga.fillStyle = "#00f";
     this.podloga.strokeStyle = '#00f';
-    this.brzina = brzina;
+    this.visina = Math.random() * (MAX_VISINA_KAPI - MIN_VISINA_KAPI) + MIN_VISINA_KAPI;
+    let odstupanjeVisine = this.visina - PROSECNA_VISINA;
+    this.brzina = PROSECNA_BRZINA + odstupanjeVisine / 5;
     this.reset();
   }
 
   update() {
     this.y += this.brzina;
+    this.x += vetar;
+    // if (this.y > window.innerHeight) this.reset();
     if (this.y > window.innerHeight) {
       this.prskanje = new Prasak(this.podloga, this.x, this.y);
       this.reset();
     }
     if (this.prskanje) {
       this.prskanje.update();
-      if (this.y > TRAJANJE_PRASKA) this.prskanje.reset();
+      // if (this.y > TRAJANJE_PRASKA) this.prskanje.reset();
     }
   }
 
   reset() {
-    this.x = Math.floor(Math.random() * (window.innerWidth || window.outerWidth)); // innerWidth returns 0?
+    let sirinaEkrana = window.innerWidth || window.outerWidth; // innerWidth vraca 0 prvi put
+    this.x = Math.floor(Math.random() * (sirinaEkrana * 2) - sirinaEkrana / 2);
     this.y = -10;
   }
 
   crta() {
-    this.podloga.fillRect(this.x, this.y, 1, VISINA_KAPI);
+    this.podloga.fillRect(this.x, this.y, 1, this.visina);
     if (this.prskanje) {
       this.prskanje.crta();
     }
@@ -40,3 +51,9 @@ export class Kap {
   }
 
 } // Kap
+
+
+function praviVetar (e) {
+  vetar = (e.clientX - prosloMishX) / 10;
+  prosloMishX = e.clientX;
+}

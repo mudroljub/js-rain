@@ -1,13 +1,9 @@
-// vece i manje kapi
-// da vece padaju brze
-// inicirati mish.prosloX u init
-
-import {Kap} from './klase/KapStaro';
+import {Kap} from './klase/Kap';
 
 /*** KONFIG ***/
 
 const UKUPNO_KAPI = 300;
-const PAUZA_KAPI = 100; // manji broj brzi zalet
+const KOCNICA_KISHE = 100; // manji broj brzi zalet
 
 let canvas, podloga;
 let kisha = [];
@@ -48,7 +44,7 @@ function crtaKapi() {
 /*** POMOĆNE FUNKCIJE ***/
 
 function dodajKap(ovajTren) {
-  if ((ovajTren - prosliTren) > PAUZA_KAPI) {
+  if ((ovajTren - prosliTren) > KOCNICA_KISHE) {
     let novaKap = new Kap(canvas);
     kisha.push(novaKap);
     prosliTren = ovajTren;

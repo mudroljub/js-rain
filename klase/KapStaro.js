@@ -1,10 +1,12 @@
+// da vece padaju brze
+
 const MIN_VISINA_KAPI = 3;
 const MAX_VISINA_KAPI = 10;
 const PROSECNA_VISINA = (MIN_VISINA_KAPI + MAX_VISINA_KAPI) / 2;
 const PROSECNA_BRZINA = 5.8;
 
 let vetar = 0;
-let prosloX = 0;
+let prosloMishX = 0;  // inicirati mish.prosloX da ne bude 0
 
 document.addEventListener('mousemove', praviVetar);
 
@@ -46,6 +48,6 @@ export class Kap {
 
 
 function praviVetar (e) {
-  vetar = (e.clientX - prosloX) / 10;
-  prosloX = e.clientX;
+  vetar = (e.clientX - prosloMishX) / 10;
+  prosloMishX = e.clientX;
 }
