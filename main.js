@@ -3,14 +3,14 @@ import {Kap} from './klase/Kap';
 /*** KONFIG ***/
 
 const UKUPNO_KAPI = 300;
-const KOCNICA_KISHE = 100; // manji broj brzi zalet
+const ZALET_KISHE = 100; // manji broj brzi zalet
 
 let canvas, podloga;
 let kisha = [];
 let prosliTren = 0;
 
 
-/*** LISTENERS ***/
+/*** LOGIKA ***/
 
 window.onload = function init() {
   canvas = document.querySelector('#canvas');
@@ -19,9 +19,6 @@ window.onload = function init() {
   podloga = canvas.getContext('2d');
   mainLoop();
 }
-
-
-/*** LOGIKA ***/
 
 function mainLoop(ovajTren) {
   window.requestAnimationFrame(mainLoop);
@@ -34,17 +31,16 @@ function update(ovajTren) {
   for (let kap of kisha) kap.update();
 }
 
-function crtaKapi() {
-  podloga.clearRect(0, 0, canvas.width, canvas.height);
-  for (let kap of kisha) {
-    kap.crta();
-  }
-}
 
 /*** POMOĆNE FUNKCIJE ***/
 
+function crtaKapi() {
+  podloga.clearRect(0, 0, canvas.width, canvas.height);
+  for (let kap of kisha) kap.crta();
+}
+
 function dodajKap(ovajTren) {
-  if ((ovajTren - prosliTren) > KOCNICA_KISHE) {
+  if ((ovajTren - prosliTren) > ZALET_KISHE) {
     let novaKap = new Kap(canvas);
     kisha.push(novaKap);
     prosliTren = ovajTren;

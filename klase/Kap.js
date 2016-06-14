@@ -4,10 +4,10 @@ const MIN_VISINA_KAPI = 3;
 const MAX_VISINA_KAPI = 10;
 const PROSECNA_VISINA = (MIN_VISINA_KAPI + MAX_VISINA_KAPI) / 2;
 const PROSECNA_BRZINA = 5.8;
-const TRAJANJE_PRASKA = 100;
 
 let vetar = 0;
 let prosloMishX = 0;  // inicirati mish.prosloX da ne bude 0
+
 document.addEventListener('mousemove', praviVetar);
 
 export class Kap {
@@ -25,14 +25,12 @@ export class Kap {
   update() {
     this.y += this.brzina;
     this.x += vetar;
-    // if (this.y > window.innerHeight) this.reset();
     if (this.y > window.innerHeight) {
       this.prskanje = new Prasak(this.podloga, this.x, this.y);
       this.reset();
     }
     if (this.prskanje) {
       this.prskanje.update();
-      // if (this.y > TRAJANJE_PRASKA) this.prskanje.reset();
     }
   }
 
@@ -44,10 +42,7 @@ export class Kap {
 
   crta() {
     this.podloga.fillRect(this.x, this.y, 1, this.visina);
-    if (this.prskanje) {
-      this.prskanje.crta();
-    }
-
+    if (this.prskanje) this.prskanje.crta();
   }
 
 } // Kap
