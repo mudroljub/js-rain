@@ -1,16 +1,22 @@
-import {Kap} from './klase/Kap';
+// vece i manje kapi
+// da vece padaju brze
+// inicirati mish.prosloX u init
+
+import {Kap} from './klase/KapStaro';
 
 /*** KONFIG ***/
 
-const BROJ_KAPI = 200;
-const UCESTALOST_KISHE = 100;  // manji broj brzi zalet
+const UKUPNO_KAPI = 300;
+const PAUZA_KAPI = 100; // manji broj brzi zalet
+
 let canvas, podloga;
 let kisha = [];
-let prosliovajTren = 0;
+let prosliTren = 0;
 
-/*** LOGIKA ***/
 
-window.onload = function() {
+/*** LISTENERS ***/
+
+window.onload = function init() {
   canvas = document.querySelector('#canvas');
   canvas.width = window.innerWidth || window.outerWidth;
   canvas.height = window.innerHeight || window.outerHeight;
@@ -18,18 +24,21 @@ window.onload = function() {
   mainLoop();
 }
 
+
+/*** LOGIKA ***/
+
 function mainLoop(ovajTren) {
   window.requestAnimationFrame(mainLoop);
-  update(ovajTren); // ovajTren daje requestAnimationFrame
-  crta();
-} // mainLoop
+  update(ovajTren); // ovajTren prosledjuje requestAnimationFrame
+  crtaKapi();
+}
 
 function update(ovajTren) {
-  if (kisha.length < BROJ_KAPI) dodajKap(ovajTren);
+  if (kisha.length < UKUPNO_KAPI) dodajKap(ovajTren);
   for (let kap of kisha) kap.update();
-} // update
+}
 
-function crta() {
+function crtaKapi() {
   podloga.clearRect(0, 0, canvas.width, canvas.height);
   for (let kap of kisha) {
     kap.crta();
@@ -39,9 +48,9 @@ function crta() {
 /*** POMOĆNE FUNKCIJE ***/
 
 function dodajKap(ovajTren) {
-  if ((ovajTren - prosliovajTren) > UCESTALOST_KISHE) {
+  if ((ovajTren - prosliTren) > PAUZA_KAPI) {
     let novaKap = new Kap(canvas);
     kisha.push(novaKap);
-    prosliovajTren = ovajTren;
+    prosliTren = ovajTren;
   }
-} // dodajKap
+}
