@@ -4,8 +4,8 @@
   "description": "ES6 Javascript rain with Webpack.",
   "main": "main.js",
   "scripts": {
-    "watch": "babel-node -- ./node_modules/.bin/webpack-dev-server --progress",
-    "start": "babel-node -- ./node_modules/.bin/webpack-dev-server --progress"
+    "start": "babel-node -- ./node_modules/.bin/webpack-dev-server --progress",
+    "build": "webpack"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
