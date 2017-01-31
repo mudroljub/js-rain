@@ -1,8 +1,10 @@
-# ES6 Rain
-
 ![](screen.png)
 
+# ES6 Rain
+
 Just a classic Javascript rain...
+
+See it in action here: http://mudroljub.github.io/kisha/
 
 ## Development
 
