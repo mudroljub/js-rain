@@ -1,4 +1,4 @@
-# ES6 kisha
+# ES6 Rain
 
 ## <a name="Installation"></a>Installation ##
 
