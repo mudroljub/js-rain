@@ -1,4 +1,4 @@
-# JS6 kisha
+# ES6 kisha
 
 ## <a name="Installation"></a>Installation ##
 
