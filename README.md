@@ -17,6 +17,5 @@ To start raining:
 Then open [http://localhost:8080/](http://localhost:8080/). The browser will automatically update when you save.
 
 ## Todo:
-* različite veličine kapi različite brzine
 * odstupanja od konstante brzine
 * noć i munje?

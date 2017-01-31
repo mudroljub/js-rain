@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1497568537a726a4f009"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b7c6737bb4db4e2c0593"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -689,56 +689,25 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _Kap = __webpack_require__(4);
 
 	/*** KONFIG ***/
 
-	const BRZINA_KISHE = 2.8;
-	const VISINA_KAPI = 9;
-	const BROJ_KAPI = 200;
-	const UCESTALOST_KISHE = 100; // manji broj brzi zalet
-	let Game = {};
-	let canvas, podloga;
-	let kisha = [];
-	let prosliovajTren = 0;
+	var UKUPNO_KAPI = 300;
+	var ZALET_KISHE = 100; // manji broj brzi zalet
 
-	/*** KLASE ***/
-
-	class Kap {
-
-	  constructor(canvas, brzina = BRZINA_KISHE) {
-	    this.podloga = canvas.getContext('2d');
-	    this.brzina = brzina;
-	    this.reset();
-	  }
-
-	  update() {
-	    this.y += this.brzina;
-	    if (this.y > window.innerHeight) this.reset();
-	  }
-
-	  reset() {
-	    this.x = Math.floor(Math.random() * (window.innerWidth || window.outerWidth)); // innerWidth returns 0 first time
-	    this.y = -10;
-	  }
-
-	  crta() {
-	    this.podloga.fillStyle = "#00f";
-	    this.podloga.fillRect(this.x, this.y, 1, VISINA_KAPI);
-	  }
-
-	  crtaPrasak() {
-	    console.log('prska', this.x, this.y);
-	    this.podloga.beginPath();
-	    this.podloga.arc(this.x, this.y, 5, 0, 2 * Math.PI);
-	    this.podloga.stroke();
-	  }
-
-	} // Kap
+	var canvas = void 0,
+	    podloga = void 0;
+	var kisha = [];
+	var prosliTren = 0;
 
 	/*** LOGIKA ***/
 
-	window.onload = function () {
+	window.onload = function init() {
 	  canvas = document.querySelector('#canvas');
 	  canvas.width = window.innerWidth || window.outerWidth;
 	  canvas.height = window.innerHeight || window.outerHeight;
@@ -747,30 +716,230 @@
 	};
 
 	function mainLoop(ovajTren) {
-	  Game.loopId = window.requestAnimationFrame(mainLoop);
-	  update(ovajTren); // ovajTren daje requestAnimationFrame
-	  crta();
-	} // mainLoop
+	  window.requestAnimationFrame(mainLoop);
+	  update(ovajTren); // ovajTren prosledjuje requestAnimationFrame
+	  crtaKapi();
+	}
 
 	function update(ovajTren) {
-	  if (kisha.length < BROJ_KAPI) dodajKap(ovajTren);
-	  for (let kap of kisha) kap.update();
-	} // update
+	  if (kisha.length < UKUPNO_KAPI) dodajKap(ovajTren);
+	  var _iteratorNormalCompletion = true;
+	  var _didIteratorError = false;
+	  var _iteratorError = undefined;
 
-	function crta() {
-	  podloga.clearRect(0, 0, canvas.width, canvas.height);
-	  for (let kap of kisha) kap.crta();
+	  try {
+	    for (var _iterator = kisha[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	      var kap = _step.value;
+	      kap.update();
+	    }
+	  } catch (err) {
+	    _didIteratorError = true;
+	    _iteratorError = err;
+	  } finally {
+	    try {
+	      if (!_iteratorNormalCompletion && _iterator.return) {
+	        _iterator.return();
+	      }
+	    } finally {
+	      if (_didIteratorError) {
+	        throw _iteratorError;
+	      }
+	    }
+	  }
 	}
 
 	/*** POMOĆNE FUNKCIJE ***/
 
-	function dodajKap(ovajTren) {
-	  if (ovajTren - prosliovajTren > UCESTALOST_KISHE) {
-	    let novaKap = new Kap(canvas);
-	    kisha.push(novaKap);
-	    prosliovajTren = ovajTren;
+	function crtaKapi() {
+	  podloga.clearRect(0, 0, canvas.width, canvas.height);
+	  var _iteratorNormalCompletion2 = true;
+	  var _didIteratorError2 = false;
+	  var _iteratorError2 = undefined;
+
+	  try {
+	    for (var _iterator2 = kisha[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	      var kap = _step2.value;
+	      kap.crta();
+	    }
+	  } catch (err) {
+	    _didIteratorError2 = true;
+	    _iteratorError2 = err;
+	  } finally {
+	    try {
+	      if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	        _iterator2.return();
+	      }
+	    } finally {
+	      if (_didIteratorError2) {
+	        throw _iteratorError2;
+	      }
+	    }
 	  }
-	} // dodajKap
+	}
+
+	function dodajKap(ovajTren) {
+	  if (ovajTren - prosliTren > ZALET_KISHE) {
+	    var novaKap = new _Kap.Kap(canvas);
+	    kisha.push(novaKap);
+	    prosliTren = ovajTren;
+	  }
+	}
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Kap = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _Prasak = __webpack_require__(5);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var MIN_VISINA_KAPI = 3;
+	var MAX_VISINA_KAPI = 10;
+	var PROSECNA_VISINA = (MIN_VISINA_KAPI + MAX_VISINA_KAPI) / 2;
+	var PROSECNA_BRZINA = 5.8;
+
+	var vetar = 0;
+	var prosloMishX = 0; // inicirati mish.prosloX da ne bude 0
+
+	document.addEventListener('mousemove', praviVetar);
+
+	var Kap = exports.Kap = function () {
+	  function Kap(canvas) {
+	    _classCallCheck(this, Kap);
+
+	    this.podloga = canvas.getContext('2d');
+	    this.podloga.fillStyle = "#00f";
+	    this.podloga.strokeStyle = '#00f';
+	    this.visina = Math.random() * (MAX_VISINA_KAPI - MIN_VISINA_KAPI) + MIN_VISINA_KAPI;
+	    var odstupanjeVisine = this.visina - PROSECNA_VISINA;
+	    this.brzina = PROSECNA_BRZINA + odstupanjeVisine / 5;
+	    this.reset();
+	  }
+
+	  _createClass(Kap, [{
+	    key: 'update',
+	    value: function update() {
+	      this.y += this.brzina;
+	      this.x += vetar;
+	      if (this.y > window.innerHeight) {
+	        this.prskanje = new _Prasak.Prasak(this.podloga, this.x, this.y);
+	        this.reset();
+	      }
+	      if (this.prskanje) {
+	        this.prskanje.update();
+	      }
+	    }
+	  }, {
+	    key: 'reset',
+	    value: function reset() {
+	      var sirinaEkrana = window.innerWidth || window.outerWidth; // innerWidth vraca 0 prvi put
+	      this.x = Math.floor(Math.random() * (sirinaEkrana * 2) - sirinaEkrana / 2);
+	      this.y = -10;
+	    }
+	  }, {
+	    key: 'crta',
+	    value: function crta() {
+	      this.podloga.fillRect(this.x, this.y, 1, this.visina);
+	      if (this.prskanje) this.prskanje.crta();
+	    }
+	  }]);
+
+	  return Kap;
+	}();
+
+	function praviVetar(e) {
+	  vetar = (e.clientX - prosloMishX) / 10;
+	  prosloMishX = e.clientX;
+	}
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var BROJ_PRSKANJA = 3;
+	var BRZINA_PRSKANJA = 1.5;
+	var MAX_DOMET_PRSKANJA = 30;
+	var VELICINA_BARICE = 3;
+	var BRZINA_BARICE = 0.1;
+
+	var Prasak = exports.Prasak = function () {
+	  function Prasak(podloga, x, y) {
+	    _classCallCheck(this, Prasak);
+
+	    this.podloga = podloga;
+	    this.x = x;
+	    this.y = y;
+	    this.raspon = 0;
+	    this.ugloviPrskanja = [];
+	  }
+
+	  _createClass(Prasak, [{
+	    key: "update",
+	    value: function update() {
+	      if (!this.x || !this.y) return;
+	      this.y += BRZINA_BARICE;
+	      this.raspon += BRZINA_PRSKANJA;
+	    }
+	  }, {
+	    key: "reset",
+	    value: function reset() {
+	      this.x = null;
+	      this.y = null;
+	    }
+	  }, {
+	    key: "crtaBaricu",
+	    value: function crtaBaricu() {
+	      if (!this.x || !this.y) return;
+	      this.podloga.beginPath();
+	      this.podloga.arc(this.x, this.y, VELICINA_BARICE, 0, 2 * Math.PI);
+	      this.podloga.fill();
+	      this.podloga.stroke();
+	    }
+	  }, {
+	    key: "crtaPrskanje",
+	    value: function crtaPrskanje() {
+	      if (!this.x || !this.y || this.raspon > MAX_DOMET_PRSKANJA) return;
+	      for (var i = 0; i < BROJ_PRSKANJA; i++) {
+	        var randomUgao = randomInRange(1, 2) * Math.PI;
+	        this.ugloviPrskanja[i] = this.ugloviPrskanja[i] || randomUgao;
+	        this.podloga.beginPath();
+	        this.podloga.arc(this.x, this.y, this.raspon, this.ugloviPrskanja[i], this.ugloviPrskanja[i] + 0.1);
+	        this.podloga.stroke();
+	      }
+	    }
+	  }, {
+	    key: "crta",
+	    value: function crta() {
+	      // this.crtaBaricu()
+	      this.crtaPrskanje();
+	    }
+	  }]);
+
+	  return Prasak;
+	}();
+
+	function randomInRange(min, max) {
+	  return Math.random() * (max - min) + min;
+	}
 
 /***/ }
 /******/ ]);
