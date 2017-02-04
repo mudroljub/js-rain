@@ -1,10 +1,10 @@
-![](screen.png)
+[![](screen.png)](http://mudroljub.github.io/kisha/)
 
 # ES6 Rain
 
 Just a classic Javascript rain...
 
-See it in action here: http://mudroljub.github.io/kisha/
+See it in action here: [mudroljub.github.io/kisha/](http://mudroljub.github.io/kisha/)
 
 ## Development
 
