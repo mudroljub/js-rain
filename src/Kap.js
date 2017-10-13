@@ -14,8 +14,6 @@ export class Kap {
 
   constructor(canvas) {
     this.podloga = canvas.getContext('2d')
-    this.podloga.fillStyle = "#00f"
-    this.podloga.strokeStyle = '#00f'
     this.visina = Math.random() * (MAX_VISINA_KAPI - MIN_VISINA_KAPI) + MIN_VISINA_KAPI
     let odstupanjeVisine = this.visina - PROSECNA_VISINA
     this.brzina = PROSECNA_BRZINA + odstupanjeVisine / 5

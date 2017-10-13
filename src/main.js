@@ -35,7 +35,10 @@ function update(ovajTren) {
 /*** POMOĆNE FUNKCIJE ***/
 
 function crtaKapi() {
-  podloga.clearRect(0, 0, canvas.width, canvas.height)
+  podloga.fillStyle = 'rgba(93, 37, 115, 0.9)'
+  podloga.fillRect(0, 0, canvas.width, canvas.height)
+  podloga.fillStyle = '#CDBEE8'
+  podloga.strokeStyle = '#CDBEE8'
   for (let kap of kisha) kap.crta()
 }
 
