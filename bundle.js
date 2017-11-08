@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b7c6737bb4db4e2c0593"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9ea6b3e3f641d44bb3d6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -581,15 +581,15 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
 	module.exports = __webpack_require__(3);
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -656,9 +656,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -687,9 +687,9 @@
 	};
 
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -751,7 +751,10 @@
 	/*** POMOĆNE FUNKCIJE ***/
 
 	function crtaKapi() {
-	  podloga.clearRect(0, 0, canvas.width, canvas.height);
+	  podloga.fillStyle = 'rgba(93, 37, 115, 0.9)';
+	  podloga.fillRect(0, 0, canvas.width, canvas.height);
+	  podloga.fillStyle = '#CDBEE8';
+	  podloga.strokeStyle = '#CDBEE8';
 	  var _iteratorNormalCompletion2 = true;
 	  var _didIteratorError2 = false;
 	  var _iteratorError2 = undefined;
@@ -785,9 +788,9 @@
 	  }
 	}
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -817,8 +820,6 @@
 	    _classCallCheck(this, Kap);
 
 	    this.podloga = canvas.getContext('2d');
-	    this.podloga.fillStyle = "#00f";
-	    this.podloga.strokeStyle = '#00f';
 	    this.visina = Math.random() * (MAX_VISINA_KAPI - MIN_VISINA_KAPI) + MIN_VISINA_KAPI;
 	    var odstupanjeVisine = this.visina - PROSECNA_VISINA;
 	    this.brzina = PROSECNA_BRZINA + odstupanjeVisine / 5;
@@ -861,9 +862,9 @@
 	  prosloMishX = e.clientX;
 	}
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 
@@ -941,5 +942,5 @@
 	  return Math.random() * (max - min) + min;
 	}
 
-/***/ }
+/***/ })
 /******/ ]);
