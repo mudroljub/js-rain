@@ -1,4 +1,4 @@
-import {Prasak} from './Prasak'
+import {Prasak} from './Prasak.js'
 
 const MIN_VISINA_KAPI = 3
 const MAX_VISINA_KAPI = 10

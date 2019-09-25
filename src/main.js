@@ -1,4 +1,4 @@
-import {Kap} from './Kap'
+import {Kap} from './Kap.js'
 
 /*** KONFIG ***/
 
