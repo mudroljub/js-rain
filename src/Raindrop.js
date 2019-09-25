@@ -9,15 +9,13 @@ const PROSECNA_BRZINA = 5.8
 let windX = 0
 let lastMouseX = 0  // inicirati mish.prosloX da ne bude 0
 
-document.addEventListener('mousemove', handleWind)
-
 export default class Raindrop {
-
   constructor() {
     this.visina = Math.random() * (MAX_VISINA_KAPI - MIN_VISINA_KAPI) + MIN_VISINA_KAPI
     const odstupanjeVisine = this.visina - PROSECNA_VISINA
     this.speed = PROSECNA_BRZINA + odstupanjeVisine / 5
     this.reset()
+    document.addEventListener('mousemove', handleWind)
   }
 
   reset() {

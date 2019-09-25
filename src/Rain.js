@@ -26,7 +26,7 @@ export default class Rain {
     ctx.fillRect(0, 0, canvas.width, canvas.height)
     ctx.fillStyle = '#CDBEE8'
     ctx.strokeStyle = '#CDBEE8'
-    for (const drop of this.drops) drop.render()
+    this.drops.forEach(drop => drop.render())
   }
 
   update(now) {

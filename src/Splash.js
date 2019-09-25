@@ -11,14 +11,14 @@ export default class Splash {
   constructor(x, y) {
     this.x = x
     this.y = y
-    this.raspon = 0
+    this.range = 0
     this.ugloviPrskanja = []
   }
 
   update() {
     if (!this.x || !this.y) return
     this.y += BRZINA_BARICE
-    this.raspon += BRZINA_PRSKANJA
+    this.range += BRZINA_PRSKANJA
   }
 
   reset() {
@@ -26,7 +26,7 @@ export default class Splash {
     this.y = null
   }
 
-  crtaBaricu() {
+  drawPuddle() {
     if (!this.x || !this.y) return
     ctx.beginPath()
     ctx.arc(this.x, this.y, VELICINA_BARICE, 0, 2 * Math.PI)
@@ -34,20 +34,20 @@ export default class Splash {
     ctx.stroke()
   }
 
-  crtaPrskanje() {
-    if (!this.x || !this.y || this.raspon > MAX_DOMET_PRSKANJA) return
+  drawSplash() {
+    if (!this.x || !this.y || this.range > MAX_DOMET_PRSKANJA) return
     for (let i = 0; i < BROJ_PRSKANJA; i++) {
       const randomUgao = randomInRange(1, 2) * Math.PI
       this.ugloviPrskanja[i] = this.ugloviPrskanja[i] || randomUgao
       ctx.beginPath()
-      ctx.arc(this.x, this.y, this.raspon, this.ugloviPrskanja[i], this.ugloviPrskanja[i] + 0.1)
+      ctx.arc(this.x, this.y, this.range, this.ugloviPrskanja[i], this.ugloviPrskanja[i] + 0.1)
       ctx.stroke()
     }
   }
 
   render() {
-    this.crtaBaricu()
-    this.crtaPrskanje()
+    this.drawPuddle()
+    this.drawSplash()
   }
 }
 
