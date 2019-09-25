@@ -6,8 +6,8 @@ const BRZINA_BARICE = 0.1
 
 export class Prasak {
 
-  constructor(podloga, x, y) {
-    this.podloga = podloga
+  constructor(ctx, x, y) {
+    this.ctx = ctx
     this.x = x
     this.y = y
     this.raspon = 0
@@ -27,10 +27,10 @@ export class Prasak {
 
   crtaBaricu() {
     if (!this.x || !this.y) return
-    this.podloga.beginPath()
-    this.podloga.arc(this.x, this.y, VELICINA_BARICE, 0, 2 * Math.PI)
-    this.podloga.fill()
-    this.podloga.stroke()
+    this.ctx.beginPath()
+    this.ctx.arc(this.x, this.y, VELICINA_BARICE, 0, 2 * Math.PI)
+    this.ctx.fill()
+    this.ctx.stroke()
   }
 
   crtaPrskanje() {
@@ -38,9 +38,9 @@ export class Prasak {
     for (var i = 0; i < BROJ_PRSKANJA; i++) {
       let randomUgao = randomInRange(1, 2) * Math.PI
       this.ugloviPrskanja[i] = this.ugloviPrskanja[i] || randomUgao
-      this.podloga.beginPath()
-      this.podloga.arc(this.x, this.y, this.raspon, this.ugloviPrskanja[i], this.ugloviPrskanja[i] + 0.1)
-      this.podloga.stroke()
+      this.ctx.beginPath()
+      this.ctx.arc(this.x, this.y, this.raspon, this.ugloviPrskanja[i], this.ugloviPrskanja[i] + 0.1)
+      this.ctx.stroke()
     }
   }
 
@@ -48,7 +48,6 @@ export class Prasak {
     // this.crtaBaricu()
     this.crtaPrskanje()
   }
-
 }
 
 

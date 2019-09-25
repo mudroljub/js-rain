@@ -5,47 +5,36 @@ import {Kap} from './Kap.js'
 const UKUPNO_KAPI = 300
 const ZALET_KISHE = 100 // manji broj brzi zalet
 
-let canvas, podloga
+let canvas, ctx
 let kisha = []
-let prosliTren = 0
+let then = 0
 
+canvas = document.querySelector('#canvas')
+canvas.width = window.innerWidth || window.outerWidth
+canvas.height = window.innerHeight || window.outerHeight
+ctx = canvas.getContext('2d')
 
-/*** LOGIKA ***/
-
-window.onload = function init() {
-  canvas = document.querySelector('#canvas')
-  canvas.width = window.innerWidth || window.outerWidth
-  canvas.height = window.innerHeight || window.outerHeight
-  podloga = canvas.getContext('2d')
-  mainLoop()
-}
-
-function mainLoop(ovajTren) {
-  window.requestAnimationFrame(mainLoop)
-  update(ovajTren) // ovajTren prosledjuje requestAnimationFrame
-  crtaKapi()
-}
-
-function update(ovajTren) {
-  if (kisha.length < UKUPNO_KAPI) dodajKap(ovajTren)
+void function update(now) {
+  window.requestAnimationFrame(update)
+  if (kisha.length < UKUPNO_KAPI) dodajKap(now)
   for (let kap of kisha) kap.update()
-}
-
+  drawRain()
+}()
 
 /*** POMOĆNE FUNKCIJE ***/
 
-function crtaKapi() {
-  podloga.fillStyle = 'rgba(93, 37, 115, 0.9)'
-  podloga.fillRect(0, 0, canvas.width, canvas.height)
-  podloga.fillStyle = '#CDBEE8'
-  podloga.strokeStyle = '#CDBEE8'
+function drawRain() {
+  ctx.fillStyle = 'rgba(93, 37, 115, 0.9)'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  ctx.fillStyle = '#CDBEE8'
+  ctx.strokeStyle = '#CDBEE8'
   for (let kap of kisha) kap.crta()
 }
 
-function dodajKap(ovajTren) {
-  if ((ovajTren - prosliTren) > ZALET_KISHE) {
+function dodajKap(now) {
+  if ((now - then) > ZALET_KISHE) {
     let novaKap = new Kap(canvas)
     kisha.push(novaKap)
-    prosliTren = ovajTren
+    then = now
   }
 }

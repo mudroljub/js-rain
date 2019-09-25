@@ -13,7 +13,7 @@ document.addEventListener('mousemove', praviVetar)
 export class Kap {
 
   constructor(canvas) {
-    this.podloga = canvas.getContext('2d')
+    this.ctx = canvas.getContext('2d')
     this.visina = Math.random() * (MAX_VISINA_KAPI - MIN_VISINA_KAPI) + MIN_VISINA_KAPI
     let odstupanjeVisine = this.visina - PROSECNA_VISINA
     this.brzina = PROSECNA_BRZINA + odstupanjeVisine / 5
@@ -24,7 +24,7 @@ export class Kap {
     this.y += this.brzina
     this.x += vetar
     if (this.y > window.innerHeight) {
-      this.prskanje = new Prasak(this.podloga, this.x, this.y)
+      this.prskanje = new Prasak(this.ctx, this.x, this.y)
       this.reset()
     }
     if (this.prskanje) {
@@ -39,10 +39,9 @@ export class Kap {
   }
 
   crta() {
-    this.podloga.fillRect(this.x, this.y, 1, this.visina)
+    this.ctx.fillRect(this.x, this.y, 1, this.visina)
     if (this.prskanje) this.prskanje.crta()
   }
-
 }
 
 
