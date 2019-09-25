@@ -1,4 +1,4 @@
-import {Prasak} from './Prasak.js'
+import Splash from './Splash.js'
 import {ctx} from './canvas.js'
 
 const MIN_VISINA_KAPI = 3
@@ -9,27 +9,15 @@ const PROSECNA_BRZINA = 5.8
 let windX = 0
 let lastMouseX = 0  // inicirati mish.prosloX da ne bude 0
 
-document.addEventListener('mousemove', praviVetar)
+document.addEventListener('mousemove', handleWind)
 
-export class Kap {
+export default class Raindrop {
 
   constructor() {
     this.visina = Math.random() * (MAX_VISINA_KAPI - MIN_VISINA_KAPI) + MIN_VISINA_KAPI
     const odstupanjeVisine = this.visina - PROSECNA_VISINA
-    this.brzina = PROSECNA_BRZINA + odstupanjeVisine / 5
+    this.speed = PROSECNA_BRZINA + odstupanjeVisine / 5
     this.reset()
-  }
-
-  update() {
-    this.y += this.brzina
-    this.x += windX
-    if (this.y > window.innerHeight) {
-      this.prskanje = new Prasak(this.x, this.y)
-      this.reset()
-    }
-    if (this.prskanje)
-      this.prskanje.update()
-
   }
 
   reset() {
@@ -38,13 +26,23 @@ export class Kap {
     this.y = -10
   }
 
-  crta() {
+  update() {
+    this.y += this.speed
+    this.x += windX
+    if (this.y > window.innerHeight) {
+      this.prskanje = new Splash(this.x, this.y)
+      this.reset()
+    }
+    if (this.prskanje) this.prskanje.update()
+  }
+
+  render() {
     ctx.fillRect(this.x, this.y, 1, this.visina)
-    if (this.prskanje) this.prskanje.crta()
+    if (this.prskanje) this.prskanje.render()
   }
 }
 
-function praviVetar(e) {
+function handleWind(e) {
   windX = (e.clientX - lastMouseX) / 10
   lastMouseX = e.clientX
 }

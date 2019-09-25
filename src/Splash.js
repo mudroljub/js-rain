@@ -6,7 +6,7 @@ const MAX_DOMET_PRSKANJA = 30
 const VELICINA_BARICE = 3
 const BRZINA_BARICE = 0.1
 
-export class Prasak {
+export default class Splash {
 
   constructor(x, y) {
     this.x = x
@@ -45,7 +45,7 @@ export class Prasak {
     }
   }
 
-  crta() {
+  render() {
     this.crtaBaricu()
     this.crtaPrskanje()
   }
