@@ -2,7 +2,7 @@
   "name": "js-rain",
   "version": "0.1.0",
   "description": "Just a classic Javascript rain...",
-  "main": "main.js",
+  "main": "index.js",
   "author": "mudroljub",
   "license": "BSD"
 }
