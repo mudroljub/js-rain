@@ -1,6 +1,6 @@
 [![](screen.png)](http://mudroljub.github.io/rain.js/)
 
-# Kiša
+# Rain
 
 Just a classic Javascript rain...
 
