@@ -1,4 +1,5 @@
 import {ctx} from './canvas.js'
+import {randomInRange} from './helpers.js'
 
 const BROJ_PRSKANJA = 3
 const BRZINA_PRSKANJA = 1.5
@@ -49,8 +50,4 @@ export default class Splash {
     this.drawPuddle()
     this.drawSplash()
   }
-}
-
-function randomInRange(min, max) {
-  return Math.random() * (max - min) + min
 }

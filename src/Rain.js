@@ -3,12 +3,12 @@ import {canvas, ctx} from './canvas.js'
 
 const totalDrops = 300
 const fraquency = 100 // manji broj brzi zalet
-
 let then = 0
 
 export default class Rain {
   constructor() {
     this.drops = []
+    this.bgColor = 'rgba(93, 37, 115, 0.9)'
   }
 
   shouldNotAdd(now) {
@@ -21,17 +21,19 @@ export default class Rain {
     then = now
   }
 
-  render() {
-    ctx.fillStyle = 'rgba(93, 37, 115, 0.9)'
+  clear() {
+    ctx.fillStyle = this.bgColor
     ctx.fillRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = '#CDBEE8'
-    ctx.strokeStyle = '#CDBEE8'
+  }
+
+  renderDrops() {
     this.drops.forEach(drop => drop.render())
   }
 
   update(now) {
     this.addDrop(now)
     this.drops.forEach(drop => drop.update())
-    this.render()
+    this.clear()
+    this.renderDrops()
   }
 }
