@@ -13,3 +13,4 @@ just open `index.html`
 ## Todo:
 * odstupanja od konstante brzine
 * noć i munje?
+- https://codepen.io/MillerTime/pen/oXmgJe
